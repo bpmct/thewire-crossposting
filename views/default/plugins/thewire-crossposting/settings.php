@@ -2,6 +2,7 @@
 <p><strong>Cross-Posting for Facebook:</strong></p>
 
 <p>1. Create a new app on <strong><a href="https://developers.facebook.com/" target="_blank">Facebook for Developers</a></strong>.</p>
+<p>2. Make sure you add the your site as the proper domain and take the site <strong><a href="https://developers.facebook.com/docs/apps/managing-development-cycle/" target="_blank">out of development mode</a></strong>.</p>
 
 <strong>App ID:</strong> <input type="text" name="params[crossposting_facebook_appid]" value="<?php echo elgg_get_plugin_setting('crossposting_facebook_appid', 'thewire-crossposting'); ?>" />
 
