@@ -51,17 +51,21 @@ $li_username = elgg_get_logged_in_user_entity()->username;
 $onclick_value = "onClick=\"if (this.checked) { window.location = '{$site_url}settings/plugins/{$li_username}/thewire-crossposting'; }\"";
 $twitter_verified = elgg_get_plugin_user_setting('twitter_verified', elgg_get_logged_in_user_entity()->guid, 'thewire-crossposting');
 
-$facebook_access_token = elgg_get_plugin_user_setting('facebook_access_token', elgg_get_logged_in_user_entity()->guid, 'thewire-crossposting');
+$facebook_appid = elgg_get_plugin_setting('crossposting_facebook_appid', 'thewire-crossposting');
+$twitter_key = elgg_get_plugin_setting('crossposting_twitter_consumerkey', 'thewire-crossposting');
 
 ?>
 
 <div class="crossposting-checkboxes">
+    <?php if (isset($facebook_appid) && $facebook_appid != null) { ?>
     <label for="crosspost-facebook">
         <input type="checkbox" id="crosspost-facebook" name="crosspost-facebook" value="true" onclick="shareFB();"> 
         Share on Facebook
     </label>
+    <?php } if (isset($twitter_key) && $twitter_key != null) { ?>
     <label for="crosspost-twitter">
         <input type="checkbox" id="crosspost-twitter" name="crosspost-twitter" value="true" <?php if (!$twitter_verified) { echo $onclick_value; } ?>>  
         Post to Twitter
     </label>
+    <?php } ?>
 </div>
