@@ -4,13 +4,22 @@
 require_once(elgg_get_plugins_path() . "thewire-crossposting/vendor/twitter-api/elgg-connect.php");
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+require_once(elgg_get_plugins_path() . "thewire-crossposting/vendor/facebook-api/elgg-connect.php");
+
+
 $twitter_verified = elgg_get_plugin_user_setting('twitter_verified', elgg_get_logged_in_user_entity()->guid, 'thewire-crossposting');
 $twitter_access_token = elgg_get_plugin_user_setting('twitter_access_token', elgg_get_logged_in_user_entity()->guid, 'thewire-crossposting');
 
+$facebook_access_token = elgg_get_plugin_user_setting('facebook_access_token', elgg_get_logged_in_user_entity()->guid, 'thewire-crossposting');
 
-if ($_GET['revoke'] == 'true') {
 
-	elgg_set_plugin_user_setting('twitter_verified', null, elgg_get_logged_in_user_entity()->guid,  'thewire-crossposting');
+if (isset($_GET['revoke']) && $_GET['revoke'] == 'twitter') {
+
+	elgg_unset_plugin_user_setting('twitter_verified', elgg_get_logged_in_user_entity()->guid,  'thewire-crossposting');
+
+} elseif (isset($_GET['revoke']) && $_GET['revoke'] == 'facebook') {
+
+	elgg_unset_plugin_user_setting('facebook_access_token', elgg_get_logged_in_user_entity()->guid,  'thewire-crossposting');
 
 }
 
@@ -19,15 +28,32 @@ if ($_GET['revoke'] == 'true') {
 <p>Simultaneously post to Facebook and/or Twitter when you make a post on <?php echo elgg_echo("thewire"); ?>.</p>
 
 <h4>Connect your Facebook account:</h4>
-<p>Coming soon&nbsp;&nbsp;</p>
+<?php 
+
+$permissions = ['email', 'user_posts'];
+$loginUrl = $helper->getLoginUrl(elgg_get_site_url() . 'cross-posting/facebook', $permissions);
+
+if(!$facebook_access_token || $_GET['revoke'] == 'facebook') {
+
+	echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+
+} else {
+
+    echo '<p style="color: #63A519;">You have already authenticated your Facebook. <a href="?revoke=facebook">Revoke</a>';
+
+}
+
+?>
+
+<br /><br /><br />
 
 <h4>Connect your Twitter account:</h4>
 
 <?php 
 
-if($twitter_verified && $_GET['revoke'] != 'true') {
+if($twitter_verified && $_GET['revoke'] != 'twitter') {
 
-    echo '<p style="color: #63A519;">You have already authenticated your Twitter. <a href="?revoke=true">Revoke</a>';
+    echo '<p style="color: #63A519;">You have already authenticated your Twitter. <a href="?revoke=twitter">Revoke</a>';
 
 } else {
 

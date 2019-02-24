@@ -26,6 +26,11 @@ function callback_handler($segments) {
     if ($segments[0] == 'twitter') {
         echo elgg_view_resource('cross-posting/twitter');
         return true;
+    } 
+    
+    if ($segments[0] == 'facebook') {
+        echo elgg_view_resource('cross-posting/facebook');
+        return true;
     }
 
     return false;
