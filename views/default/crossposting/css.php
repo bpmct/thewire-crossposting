@@ -26,7 +26,8 @@
 
     .crossposting-checkboxes {
         bottom: 30px;
-        left: 15px;
+        right: 0px;
+        text-align: left;
     }
 
 }
