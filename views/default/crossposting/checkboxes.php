@@ -47,11 +47,7 @@ window.fbAsyncInit = function() {
 
     } else {
 
-        <?php if (elgg_plugin_exists("hypeDiscovery")) { ?>
             url = "<?php echo elgg_get_site_url() . "permalink/default/" . intval($_GET['sharefb']); ?>";
-        <?php } else { ?>
-            url = "<?php echo elgg_get_site_url() . "profile/" . elgg_get_logged_in_user_entity()->username; ?>";
-        <?php } ?>
 
     }
 
@@ -68,15 +64,15 @@ window.fbAsyncInit = function() {
 
 <?php } ?>
 
-<div class="crossposting-checkboxes">
+<div class="elgg-col elgg-col-1of2 crossposting-checkboxes">
     <?php if (isset($facebook_appid) && $facebook_appid != null) { ?>
-    <label for="crosspost-facebook">
-        <input type="checkbox" id="crosspost-facebook" name="crosspost-facebook" value="true"> 
+    <label class="crosspost-option" for="crosspost-facebook">
+        <input type="checkbox" id="crosspost-facebook" name="rc_crosspost_facebook" value="true"> 
         Share on Facebook
     </label>
     <?php } if (isset($twitter_key) && $twitter_key != null) { ?>
-    <label for="crosspost-twitter">
-        <input type="checkbox" id="crosspost-twitter" name="crosspost-twitter" value="true" <?php if (!$twitter_verified) { echo $onclick_value; } ?>>  
+    <label class="crosspost-option" for="crosspost-twitter">
+        <input type="checkbox" id="crosspost-twitter" name="rc_crosspost_twitter" value="true" <?php if (!$twitter_verified) { echo $onclick_value; } ?>>  
         Post to Twitter
     </label>
     <?php } ?>
