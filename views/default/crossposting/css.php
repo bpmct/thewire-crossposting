@@ -1,10 +1,6 @@
+.crosspost-option {
 
-.crossposting-checkboxes {
-
-    position: relative;
-    bottom: 50px;
-    right: 180px;
-    text-align: right;
+    
 
 }
 
@@ -19,15 +15,5 @@
 
     position: relative;
     top: 2px;
-
-}
-
-@media only screen and (max-width: 720px) {
-
-    .crossposting-checkboxes {
-        bottom: 30px;
-        right: 0px;
-        text-align: left;
-    }
 
 }
